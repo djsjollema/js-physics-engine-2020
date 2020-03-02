@@ -9,11 +9,8 @@ canvas.height = height;
 
 // begin hier met jouw code voor deze opdracht
 
-let myPoint = new Point(500,200,20,"red");
-myPoint.draw(context);
+context.beginPath();
+context.arc(300,400,100,0,Math.PI*2);
+context.stroke();
 
-let myPoint2 = new Point(100,100,40,"green");
-myPoint2.draw(context);
-
-let myPoint3 = new Point(200,400,80,"blue");
-myPoint3.draw(context);
+let myCircle = new Point();
