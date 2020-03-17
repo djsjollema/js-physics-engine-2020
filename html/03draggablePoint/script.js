@@ -7,14 +7,10 @@ const height = window.innerHeight;
 canvas.width = width;
 canvas.height = height;
 
-let points = [];
-
-for(let i =0; i<3; i++){
-  let x = getRandomInt(0,width);
-  let y = getRandomInt(0,height);
-  let myPoint = new Point(x,y,5,"black",i);
-  points.push(myPoint);
+let myPoint = new Point(200,200,50,"red",true)
+function animate(){
+  context.clearRect(0,0,width,height);
+  myPoint.draw(context)
 }
 
-let myPolygon = new Poygon(points);
-myPolygon.draw(context);
+setInterval(animate,10);
