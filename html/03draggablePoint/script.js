@@ -13,6 +13,7 @@ let myPoint = new Point(200,300,30,"red",true);
 
 
 function animate(){
+  context.clearRect(0,0,width,height)
   myPoint.draw(context)
 }
 
