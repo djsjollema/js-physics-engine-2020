@@ -11,15 +11,15 @@ canvas.height = height;
 
 // create namespace
 let A,B,C;
-let lAB,lBC,LCA;
+let lAB,lBC,lCA;
 let MAB,MBC,MCA;
 let lAMBC;
 
-A = new Point(100,100,20,"red",true);
-B = new Point(600,150,20,"green",true);
-C = new Point(300,300,20,"blue",true);
+A = new Point(100,100,20,"red",true,"A");
+B = new Point(600,150,20,"green",true,"B");
+C = new Point(300,300,20,"blue",true,"C");
 
-MBC = new Point(50,50,10,"white",false);
+MBC = new Point(50,50,10,"white",false,"MMBC");
 
 lAB = new LinearFunction(0.5,1);
 lAMBC = new LinearFunction(2,100);
