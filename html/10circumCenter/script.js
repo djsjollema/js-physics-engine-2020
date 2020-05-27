@@ -10,14 +10,20 @@ canvas.height = height;
 // begin hier met jouw code voor deze opdracht
 
 // create namespace
-let A,B,C,ab,bc,ca,mAB;
+let A,B,C,ab,bc,ca,mAB,lAB,lBC,circumCenter,distance;
 A = new Point(0.10 * width,0.10*height,20,"red",true,"A");
-B = new Point(0.90 * width,0.10*height,20,"green",true,"B");
+B = new Point(0.90 * width,0.20*height,20,"green",true,"B");
 C = new Point(0.50 * width,0.90*height,20,"blue",true,"C");
 ab = new LinearFunction(1,1);
 bc = new LinearFunction(1,1);
 ca = new LinearFunction(1,1);
 
+mAB = new Point(0,0,10,"black",false,"mAB");
+mBC= new Point(0,0,10,"black",false,"mAB");
+lAB = new LinearFunction(1,1);
+lBC = new LinearFunction(1,1);
+
+circumCenter = new Point(0,0,10,"white",false,"circumCenter");
 
 function animate(){
   context.clearRect(0,0,width,height);
@@ -46,8 +52,34 @@ function animate(){
   B.draw();
   C.draw();
 
+  mAB.x = (A.x + B.x)/2;
+  mAB.y = (A.y + B.y)/2;
+  mAB.draw();
 
+  mBC.x = (C.x + B.x)/2;
+  mBC.y = (C.y + B.y)/2;
+  mBC.draw();
 
+  lAB.slope = -1/ab.slope;
+  lAB.intercept = mAB.y - mAB.x*lAB.slope;
+  lAB.draw(context);
+
+  lBC.slope = -1/bc.slope;
+  lBC.intercept = mBC.y - mBC.x*lBC.slope;
+  lBC.draw(context);
+
+  circumCenter.x = lAB.intersection(lBC).x;
+  circumCenter.y = lAB.intersection(lBC).y;
+
+  circumCenter.draw();
+
+  let dx = circumCenter.x - A.x;
+  let dy = circumCenter.y - A.y;
+  distance = Math.sqrt(dx*dx + dy*dy)
+
+  context.beginPath();
+  context.arc(circumCenter.x,circumCenter.y,distance,0,2*Math.PI);
+  context.stroke();
 }
 
 setInterval(animate,10);
