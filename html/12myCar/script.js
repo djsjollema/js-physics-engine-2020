@@ -20,15 +20,16 @@ car.speed = 2;
 wheel = {};
 wheel.image = new Image()
 wheel.image.src = "images/wheel.png";
+wheel.backAngle = 0;
 
 addEventListener('keydown',(e)=>{
   //console.log(e.key);
   switch(e.key) {
     case "ArrowRight":
-      car.speed += 0.2
+      car.speed += 0.5
       break;
     case "ArrowLeft":
-      car.speed -= 0.2;
+      car.speed -= 0.5;
       break;
   }
 })
@@ -41,8 +42,20 @@ function animate(){
   context.clearRect(0,0,width,height);
   context.drawImage(car.image,car.pos,0);
 
+  context.save()
+  context.translate(car.pos + 213,200)
+  context.rotate(wheel.backAngle);
+  context.drawImage(wheel.image,-wheel.image.width/2,-wheel.image.height/2)
+  context.restore()
+
+
   car.pos += car.speed;
   if(car.pos > width){
     car.pos = -car.image.width
   }
+  if(car.pos < -car.image.width){
+    car.pos = width;
+  }
+
+  wheel.backAngle += 0.2;
 }
