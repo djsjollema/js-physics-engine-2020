@@ -17,10 +17,13 @@ car.image.src = "images/car.png"
 car.pos = 0;
 car.speed = 2;
 
-wheel = {};
-wheel.image = new Image()
-wheel.image.src = "images/wheel.png";
-wheel.backAngle = 0;
+wheels = {};
+wheels.backWheel = new Image()
+wheels.backWheel.src = "images/wheel.png";
+wheels.frontWheel = new Image()
+wheels.frontWheel.src = "images/wheel.png";
+
+wheels.angle = 0;
 
 addEventListener('keydown',(e)=>{
   //console.log(e.key);
@@ -44,8 +47,14 @@ function animate(){
 
   context.save()
   context.translate(car.pos + 213,200)
-  context.rotate(wheel.backAngle);
-  context.drawImage(wheel.image,-wheel.image.width/2,-wheel.image.height/2)
+  context.rotate(wheels.angle);
+  context.drawImage(wheels.backWheel,-wheels.backWheel.width/2,-wheels.backWheel.height/2)
+  context.restore()
+
+  context.save()
+  context.translate(car.pos + 753,200)
+  context.rotate(wheels.angle);
+  context.drawImage(wheels.frontWheel,-wheels.frontWheel.width/2,-wheels.frontWheel.height/2)
   context.restore()
 
 
@@ -57,5 +66,6 @@ function animate(){
     car.pos = width;
   }
 
-  wheel.backAngle += 0.2;
+  wheels.angle += car.speed / (0.5*wheels.backWheel.width);
+  //console.log(car.speed / (0.5*wheels.backWheel.width))
 }
