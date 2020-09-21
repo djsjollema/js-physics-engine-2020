@@ -30,10 +30,12 @@ function animate(){
 
   context.clearRect(0,0,width,height);
   //drawImage(img,sx,sy,sw,sh,x,y,w,h)
-  //context.drawImage(img_highres,400,400,200,200,500,300,200,200);
+
   context.drawImage(img_lowres,0,0);
 
   //point.draw()
-  context.fillRect(coordinate.x,coordinate.y,2*point.radius,2*point.radius);
+  context.fillRect(coordinate.x-5,coordinate.y-5,2*point.radius+10,2*point.radius+10);
+
+  context.drawImage(img_highres,coordinate.x,coordinate.y,200,200,coordinate.x,coordinate.y,2*point.radius,2*point.radius);
 
 }
