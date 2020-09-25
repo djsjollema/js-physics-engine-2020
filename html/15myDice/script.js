@@ -9,8 +9,21 @@ canvas.height = height;
 
 // begin hier met jouw code voor deze opdracht
 
-setInterval(animate,10)
+let img,background;
+img = new Image();
+img.src = "images/nijntje.png"
+
+background = new Image();
+background.src = "images/park.png"
+
+img.addEventListener('load',()=>{
+  setInterval(animate,10)
+})
+
+
 
 function animate(){
   context.clearRect(0,0,width,height);
+  context.drawImage(background,0,0,width,height)
+  context.drawImage(img,500,height-450)
 }
