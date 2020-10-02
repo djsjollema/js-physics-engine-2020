@@ -7,58 +7,32 @@ const height = window.innerHeight;
 canvas.width = width;
 canvas.height = height;
 
-
-context.font = "80px Arial";
-
-
 // begin hier met jouw code voor deze opdracht
 
-let dice,val1,val2,score,scoreList;
+let dice,sw,sh,roll_1,roll_2,score,scoreList;
 
 dice = {};
 dice.image = new Image();
 dice.image.src = "images/dice.png";
 
 scoreList = [];
-for(let i=2;i<=12;i++){
-  scoreList.push(0);
+for(let i = 2; i<=12;i++){
+  scoreList.push(0)
 }
 
 dice.image.addEventListener('load',()=>{
-  dice.width = dice.image.width/6;
-  dice.height = dice.image.height;
-  setInterval(animate,1000)
+  sw = dice.image.width/6;
+  sh = dice.image.height;
 
+  setInterval(animate,500);
 })
 
 function animate(){
-  val1 = Math.floor(Math.random()*6)+1;
-  val2 = Math.floor(Math.random()*6)+1;
-  score = val1+val2;
+  roll_1 = Math.floor(Math.random()*6)+1;
+  roll_2 = Math.floor(Math.random()*6)+1;
+  score = roll_1 + roll_2;
+  context.drawImage(dice.image,(roll_1-1)*sw,0,sw,sh,200,200,sw,sh)
+  context.drawImage(dice.image,(roll_2-1)*sw,0,sw,sh,400,200,sw,sh);
   scoreList[score-2]++
   console.log(score,scoreList)
-
-  context.clearRect(0,0,width,height);
-  context.drawImage(
-    dice.image,
-    (val1-1)*dice.width,
-    0,
-    dice.width,
-    dice.height,
-    0,
-    0,
-    dice.width,
-    dice.height);
-
-    context.drawImage(
-      dice.image,
-      (val2-1)*dice.width,
-      0,
-      dice.width,
-      dice.height,
-      dice.width,
-      0,
-      dice.width,
-      dice.height);
-  context.fillText(score, 500, 100);
 }
