@@ -8,22 +8,20 @@ canvas.width = width;
 canvas.height = height;
 
 // begin hier met jouw code voor deze opdracht
+let img,numberOnARow,numberOnAColumn,sx,sy,sw,sh,x,y,w,h;
+img = new Image();
+img.src = "images/cardDeck.png";
 
-let numberOfDices,dices;
+numberOnARow = 13;
+numberOnAColumn = 5;
 
-numberOfDices = 4;
-dices = [];
 
-for(let i=0;i<numberOfDices;i++){
-  dices.push(makeDice())
+img.addEventListener('load',()=>{
+  sw = img.width/numberOnARow;
+  sh = img.height/numberOnAColumn;
+  animate();
+})
+
+function animate(){
+  context.drawImage(img,0,0,sw,sh, 100,100,sw,sh)
 }
-
-function makeDice(){
-  let dice = [];
-  for(let i=0;i<6;i++){
-    dice[i]=i+1;
-  }
-  return dice;
-}
-dices.flat();
-console.log(dices.flatMap(v=>[v*2]))
