@@ -8,12 +8,14 @@ canvas.width = width;
 canvas.height = height;
 
 // begin hier met jouw code voor deze opdracht
-let img,numberOnARow,numberOnAColumn,sx,sy,sw,sh,x,y,w,h;
+let img,numberOnARow,numberOnAColumn,sx,sy,sw,sh,x,y,w,h,index;
 img = new Image();
 img.src = "images/cardDeck.png";
 
 numberOnARow = 13;
 numberOnAColumn = 5;
+
+index = Math.floor(Math.random()*52);
 
 
 img.addEventListener('load',()=>{
@@ -23,5 +25,7 @@ img.addEventListener('load',()=>{
 })
 
 function animate(){
-  context.drawImage(img,0,0,sw,sh, 100,100,sw,sh)
+  sx= (index%numberOnARow)*sw;
+  sy = Math.floor(index/numberOnARow)*sh
+  context.drawImage(img,sx,sy,sw,sh, 100,100,sw,sh)
 }
