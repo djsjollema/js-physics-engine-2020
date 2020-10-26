@@ -20,26 +20,43 @@ greenTank = {};
 greenTank.animationArray = [1,2,3,4,5,6,7,8];
 greenTank.index = 0;
 
+greenTank.x = 100;
+greenTank.y = 100;
+
+greenTank.vx = 0;
+greenTank.vy = -10;
+
+
 greenTank.draw = function(){
-  context.drawImage(spriteSheet,greenTank.animationArray[greenTank.index]* 84,0,84,84,100,100,84,84)
+  greenTank.sx = greenTank.animationArray[greenTank.index]%8 * 84;
+  greenTank.sy = Math.floor(greenTank.animationArray[greenTank.index]/8) * 84;
+  context.drawImage(spriteSheet,greenTank.sx,greenTank.sy,84,84,greenTank.x,greenTank.y,84,84)
 }
+
+greenTank.update = function(){
+  greenTank.x += greenTank.vx;
+  greenTank.y += greenTank.vy;
+  if(greenTank.y <0){
+    greenTank.y = height;
+  }
+}
+
 
 
 spriteSheet.addEventListener('load',()=>{
   sw = spriteSheet.width/8;
   sh = spriteSheet.height/4
-  //console.log(spriteSheet.width,spriteSheet.height,sw,sh)
-  //context.drawImage(spriteSheet,0,0);
   setInterval(animate,100);
 });
 
 function animate(){
   context.clearRect(0,0,width,height);
+  greenTank.update();
   greenTank.draw();
   greenTank.index += 1;
-  if(greenTank.index >= greenTank.animationArray.length-1){
+  if(greenTank.index >= greenTank.animationArray.length){
     greenTank.index = 0
   }
-  console.log(greenTank.index)
+  // console.log(greenTank.index)
 
 }
