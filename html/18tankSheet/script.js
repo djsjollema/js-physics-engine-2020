@@ -10,42 +10,36 @@ canvas.height = height;
 // begin hier met jouw code voor deze opdracht
 
 // declare namespace
-let runningCat,sw,sh,sx,sy,x,y,w,h,index;
-let xspeed;
+
+let spriteSheet,sw,sh,greenTank;
+
+spriteSheet = new Image();
+spriteSheet.src = "images/tanksheet.png";
+
+greenTank = {};
+greenTank.animationArray = [1,2,3,4,5,6,7,8];
+greenTank.index = 0;
+
+greenTank.draw = function(){
+  context.drawImage(spriteSheet,greenTank.animationArray[greenTank.index]* 84,0,84,84,100,100,84,84)
+}
 
 
-runningCat = new Image()
-runningCat.src = "images/runningcat.png";
-index = 0;
-xspeed = 20;
-
-runningCat.addEventListener('load',()=>{
-  sw = runningCat.width/2;
-  sh = runningCat.height/4;
-  x = 100;
-  y = 100;
-
-  setInterval(animate,1000)
-})
+spriteSheet.addEventListener('load',()=>{
+  sw = spriteSheet.width/8;
+  sh = spriteSheet.height/4
+  //console.log(spriteSheet.width,spriteSheet.height,sw,sh)
+  //context.drawImage(spriteSheet,0,0);
+  setInterval(animate,100);
+});
 
 function animate(){
-  sx = index%2 * sw;
-  sy = Math.floor(index/2) * sh;
-
-  w = sw;
-  h = sh;
-
-  console.log(index,x);
-  context.clearRect(0,0,width,height)
-  context.drawImage(runningCat,sx,sy,sw,sh,x,y,w,h)
-  //context.drawImage(runningCat,0,0);
-  index++;
-  if(index>7){
-    index = 0 ;
+  context.clearRect(0,0,width,height);
+  greenTank.draw();
+  greenTank.index += 1;
+  if(greenTank.index >= greenTank.animationArray.length-1){
+    greenTank.index = 0
   }
-  x += xspeed;
-  if(x>width){
-    x = -sw
-  }
+  console.log(greenTank.index)
 
 }
