@@ -11,7 +11,11 @@ canvas.height = height;
 
 // declare namespace
 
-let spriteSheet,sw,sh,greenTank;
+let spriteSheet,sw,sh,greenTank,backGround;
+
+backGround = [31,30,30,30,30,30,30,30,30,30,31,
+               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+
 
 spriteSheet = new Image();
 spriteSheet.src = "images/tanksheet.png";
