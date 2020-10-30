@@ -17,7 +17,7 @@ spriteSheet = new Image();
 spriteSheet.src = "images/tanksheet.png";
 
 greenTank = {};
-greenTank.animationArray = [1,2,3,4,5,6,7,8];
+greenTank.animationArray = [8,7,6,5,4,3,2,1];
 greenTank.index = 0;
 
 greenTank.x = 100;
@@ -40,6 +40,10 @@ greenTank.update = function(){
     greenTank.y = height;
   }
 }
+
+window.addEventListener('keydown',(e)=>{
+  console.log(e.key)
+})
 
 
 
