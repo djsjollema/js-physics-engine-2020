@@ -11,21 +11,25 @@ canvas.height = height;
 
 // declare namespace
 
-let spriteSheet,sw,sh,greenTank;
+let spriteSheet,sw,sh,greenTank,backGround;
 
 spriteSheet = new Image();
 spriteSheet.src = "images/tanksheet.png";
+
+
+
 
 greenTank = {};
 greenTank.animationArray = [8,7,6,5,4,3,2,1];
 greenTank.index = 0;
 greenTank.direction = 0;
+greenTank.speed = 5
 
 greenTank.x = 100;
 greenTank.y = 100;
 
 greenTank.vx = 0;
-greenTank.vy = -10;
+greenTank.vy = -greenTank.speed;
 
 
 greenTank.draw = function(){
@@ -59,23 +63,23 @@ greenTank.update = function(){
 window.addEventListener('keydown',(e)=>{
   switch (e.key) {
     case "ArrowRight":
-        greenTank.vx = 10;
+        greenTank.vx = greenTank.speed;
         greenTank.vy = 0;
         greenTank.direction = 0.5 * Math.PI;
       break;
       case "ArrowDown":
           greenTank.vx = 0;
-          greenTank.vy = 10;
+          greenTank.vy = greenTank.speed;
           greenTank.direction = Math.PI;
       break;
       case "ArrowLeft":
-          greenTank.vx = -10;
+          greenTank.vx = -greenTank.speed;
           greenTank.vy = 0;
           greenTank.direction = 1.5 * Math.PI;
       break;
       case "ArrowUp":
           greenTank.vx = 0;
-          greenTank.vy = -10;
+          greenTank.vy = -greenTank.speed;
           greenTank.direction = 0;
       break;
     default:
@@ -91,6 +95,8 @@ spriteSheet.addEventListener('load',()=>{
 
 function animate(){
   context.clearRect(0,0,width,height);
+  drawBackground()
+
   greenTank.update();
   greenTank.draw();
   greenTank.index += 1;
@@ -99,4 +105,34 @@ function animate(){
   }
   // console.log(greenTank.index)
 
+}
+
+backGround = [0,0,31,0,
+              0,0,31,0,
+              31,31,0,31
+            ];
+
+function drawBackground(){
+  //context.draw(spritesheet,sx,sy,sw,sh,,0,0,sw,sh);
+  // context.drawImage(spriteSheet,7*84,3*84,84,84,0,0,84,84);
+  // context.drawImage(spriteSheet,0,0,84,84,84,0,84,84);
+  // context.drawImage(spriteSheet,0,0,84,84,168,0,84,84);
+  // context.drawImage(spriteSheet,0,0,84,84,0,84,84,84);
+  // context.drawImage(spriteSheet,0,0,84,84,84,84,84,84);
+  // context.drawImage(spriteSheet,0,0,84,84,168,84,84,84);
+
+  for(i=0;i<backGround.length;i++){
+    let tileWidth = 84;
+    let tileHeight = 84;
+    let tilesOnOneRow = 4;
+
+    let tileX = (i % tilesOnOneRow) * tileWidth;
+    let tileY = Math.floor(i/tilesOnOneRow) * tileHeight;
+
+    let sX = (backGround[i] % 8) * tileWidth;
+    let sY = Math.floor(backGround[i]/8) * tileHeight;
+
+    context.drawImage(spriteSheet,sX,sY,84,84,tileX,tileY,84,84);
+    // console.log(i)
+  }
 }
