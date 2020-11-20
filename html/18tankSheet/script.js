@@ -13,6 +13,10 @@ canvas.height = height;
 
 let spriteSheet,sw,sh,greenTank,backGround;
 
+let tileWidth = 84;
+let tileHeight = 84;
+let tilesOnOneRow = 4;
+
 spriteSheet = new Image();
 spriteSheet.src = "images/tanksheet.png";
 
@@ -23,27 +27,35 @@ greenTank = {};
 greenTank.animationArray = [8,7,6,5,4,3,2,1];
 greenTank.index = 0;
 greenTank.direction = 0;
-greenTank.speed = 5
+greenTank.speed = 5;
 
 greenTank.x = 100;
 greenTank.y = 100;
 
 greenTank.vx = 0;
 greenTank.vy = -greenTank.speed;
+greenTank.indexPosition = 0;
 
 
 greenTank.draw = function(){
   greenTank.sx = greenTank.animationArray[greenTank.index]%8 * 84;
   greenTank.sy = Math.floor(greenTank.animationArray[greenTank.index]/8) * 84;
+
+  context.beginPath()
+  context.strokeStyle = "yellow";
+  context.lineWidth = "5";
+  context.rect(greenTank.indexPosition%tilesOnOneRow*tileWidth,Math.floor(greenTank.indexPosition/tilesOnOneRow)*tileHeight,tileWidth,tileHeight);
+  context.stroke();
+
   context.save();
   context.translate(greenTank.x,greenTank.y)
   context.rotate(greenTank.direction)
-
   context.drawImage(spriteSheet,greenTank.sx,greenTank.sy,84,84,-42,-42,84,84);
   context.restore();
 }
 
 greenTank.update = function(){
+  greenTank.indexPosition = (Math.floor(greenTank.y/84) * tilesOnOneRow) + Math.floor(greenTank.x / tileWidth);
   greenTank.x += greenTank.vx;
   greenTank.y += greenTank.vy;
   if(greenTank.y <0){
@@ -103,7 +115,7 @@ function animate(){
   if(greenTank.index >= greenTank.animationArray.length){
     greenTank.index = 0
   }
-  // console.log(greenTank.index)
+  console.log(greenTank.x,greenTank.y,greenTank.indexPosition)
 
 }
 
@@ -122,9 +134,7 @@ function drawBackground(){
   // context.drawImage(spriteSheet,0,0,84,84,168,84,84,84);
 
   for(i=0;i<backGround.length;i++){
-    let tileWidth = 84;
-    let tileHeight = 84;
-    let tilesOnOneRow = 4;
+
 
     let tileX = (i % tilesOnOneRow) * tileWidth;
     let tileY = Math.floor(i/tilesOnOneRow) * tileHeight;
