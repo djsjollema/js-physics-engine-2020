@@ -24,5 +24,5 @@ function animate(){
   requestAnimationFrame(animate);
   context.clearRect(0,0,width,height);
   pointA.draw();
-  pointA.position.draw(pointA.x,pointA.y);
+  pointA.position.draw(0,0);
 }
