@@ -10,12 +10,14 @@ canvas.height = height;
 // begin hier met jouw code voor deze opdracht
 
 // declare namespace
-let pointA, positionVector;
+let pointA, positionVectorA, poitB, positionVectorB;
 
 // assign values
-positionVector = new Vector2d(300,200);
+positionVectorA = new Vector2d(300,200);
+positionVectorB = new Vector2d(100,300);
 
 pointA = new Point(100,100,20,"rgba(255,255,30,0.5)",true,"pointA");
+pointB = new Point(100,300,20,"rgba(255,255,30,0.5)",true,"pointB");
 
 animate();
 
@@ -23,7 +25,9 @@ animate();
 function animate(){
   requestAnimationFrame(animate);
   context.clearRect(0,0,width,height);
-  pointA.position.draw(0,0);
+  pointA.position.draw(0,0,"blue");
+  pointB.position.draw(0,0,"red");
   pointA.draw();
+  pointB.draw();
 
 }
