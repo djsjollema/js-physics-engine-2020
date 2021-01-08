@@ -14,7 +14,7 @@ let point,position,velocity;
 
 // assign values
 point = new Point(200,300,15,"red",false,"p");
-position = new Vector2d(0,0);
+position = point.vPos;
 velocity = new Vector2d(2,3);
 
 animate();
@@ -27,7 +27,22 @@ function animate(){
   point.vPos.draw(0,0,"yellow");
   position.sumVector(position,velocity);
   point.vPos = position;
+
   if(point.vPos.dy > height){
     velocity.dy = -velocity.dy;
   }
+
+  if(point.vPos.dy < 0 ){
+    velocity.dy = -velocity.dy;
+  }
+
+  if(point.vPos.dx > width){
+    velocity.dx = -velocity.dx;
+  }
+  if(point.vPos.dx < 0 ){
+    velocity.dx = -velocity.dx ;
+  }
+
+velocity.draw(position.dx,position.dy,"blue",50)
+
 }
