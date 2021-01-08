@@ -21,9 +21,13 @@ animate();
 
 //animation loop
 function animate(){
+  context.clearRect(0,0,width,height)
   requestAnimationFrame(animate)
   point.draw();
   point.vPos.draw(0,0,"yellow");
   position.sumVector(position,velocity);
   point.vPos = position;
+  if(point.vPos.dy > height){
+    velocity.dy = -velocity.dy;
+  }
 }
