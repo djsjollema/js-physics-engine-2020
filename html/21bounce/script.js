@@ -9,16 +9,21 @@ canvas.height = height;
 
 // begin hier met jouw code voor deze opdracht
 
-// declare namespace
-
+// declare namespace en scope
+let point,position,velocity;
 
 // assign values
-
+point = new Point(200,300,15,"red",false,"p");
+position = new Vector2d(0,0);
+velocity = new Vector2d(2,3);
 
 animate();
 
 //animation loop
 function animate(){
-
-
+  requestAnimationFrame(animate)
+  point.draw();
+  point.vPos.draw(0,0,"yellow");
+  position.sumVector(position,velocity);
+  point.vPos = position;
 }
