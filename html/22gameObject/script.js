@@ -24,4 +24,5 @@ function animate(){
   requestAnimationFrame(animate);
   myGO.update();
   myGO.draw(context);
+  myGO.vel.draw(myGO.pos.dx,myGO.pos.dy,"rgba(255,0,0,0.2)",20)
 }
