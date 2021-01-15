@@ -46,6 +46,8 @@ function animate(){
     velocity.dx = -velocity.dx ;
   }
 
-velocity.draw(position.dx,position.dy,"blue",10)
+velocity.draw(position.dx,position.dy,"blue",10);
+acc.draw(position.dx,position.dy,"green",50);
+
 
 }
