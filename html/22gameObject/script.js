@@ -14,7 +14,7 @@ let myGO;
 
 
 // assign values
-myGO = new GameObject(new Vector2d(200,200),new Vector2d(4,5),new Vector2d(0,0));
+myGO = new GameObject(new Vector2d(200,200),new Vector2d(4,5),new Vector2d(0,1));
 
 animate();
 
@@ -24,5 +24,5 @@ function animate(){
   requestAnimationFrame(animate);
   myGO.update();
   myGO.draw(context);
-  myGO.vel.draw(myGO.pos.dx,myGO.pos.dy,"rgba(255,0,0,0.2)",20)
+  myGO.vel.draw(myGO.pos.dx,myGO.pos.dy,"rgba(255,0,0,0.2)",10)
 }
