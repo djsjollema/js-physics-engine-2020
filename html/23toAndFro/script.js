@@ -31,7 +31,10 @@ function animate(){
 
 
   point.draw(context);
-  point.vel.draw(point.pos.dx,point.pos.dy,"red",20)
-  dif.draw(point.pos.dx,point.pos.dy,"blue",1)
+  point.vel.draw(point.pos.dx,point.pos.dy,"red",20);
+  dif.draw(point.pos.dx,point.pos.dy,"blue",1);
+
+  point.vel.sumVector(point.vel,dif);
+  point.vel.magnitude =0.2
   point.update();
 }
