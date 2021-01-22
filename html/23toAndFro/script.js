@@ -8,7 +8,7 @@ canvas.width = width;
 canvas.height = height;
 
 // begin hier met jouw code voor deze opdrachtlet myGO;
-let A,B, point,dif;
+let A,B, point,dif,distance,gotoB;
 
 // declare namespace en scope
 A = new GameObject(new Vector2d(100,100),new Vector2d(0,0),new Vector2d(0,0));
@@ -16,6 +16,8 @@ B = new GameObject(new Vector2d(400,300),new Vector2d(0,0),new Vector2d(0,0));
 point = new GameObject(new Vector2d(200,200),new Vector2d(-1,1),new Vector2d(0,0));
 //point.vel.magnitude = 2;
 dif = new Vector2d(0,0)
+gotoB =true;
+
 animate();
 
 //animation loop
@@ -25,7 +27,16 @@ function animate(){
   A.draw(context);
   B.draw(context);
 
-  dif.difVector(B.pos,point.pos);
+  if(gotoB){
+    dif.difVector(B.pos,point.pos);
+  } else {
+    dif.difVector(A.pos,point.pos);
+  }
+
+  distance = dif.magnitude;
+  if(distance < 10){
+    gotoB = false;
+  }
   B.pos.draw(0,0,"white",1);
   point.pos.draw(0,0,"white",1);
 
