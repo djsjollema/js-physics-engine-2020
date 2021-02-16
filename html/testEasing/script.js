@@ -10,12 +10,11 @@ canvas.height = height;
 // begin hier met jouw code voor deze opdrachtlet myGO;
 
 // declare namespace en scope
-let A,B,point,toB,difference,distance;
-
-A = new GameObject(new Vector2d(width*0.2,height*0.2),new Vector2d(1,1),new Vector2d(0,0));
+let A,B,point,toB,difference,distance,test;
+A = new GameObject(new Vector2d(width*0.2,height*0.2),new Vector2d(0,0),new Vector2d(0,0));
 A.radius = 30;
 A.color = "red";
-B = new GameObject(new Vector2d(width*0.8,height*0.8),new Vector2d(-1,1),new Vector2d(0,0));
+B = new GameObject(new Vector2d(width*0.8,height*0.8),new Vector2d(0,0),new Vector2d(0,0));
 B.radius = 30;
 B.color = "yellow";
 point = new GameObject(new Vector2d(400,200),new Vector2d(0,0),new Vector2d(0,0));
@@ -25,6 +24,9 @@ toB = true;
 
 difference.difVector(A.pos,B.pos);
 distance = difference.magnitude
+test = new Vector2d(0,0);
+test.difVector(B.pos,A.pos);
+console.log(test.magnitude)
 
 animate();
 
@@ -42,9 +44,12 @@ function animate(){
   if(difference.magnitude < 40){
     toB = !toB;
   }
+  console.log(difference.magnitude/test.magnitude)
 
   difference.magnitude = EasingFunctions.easeOutCubic(difference.magnitude/distance)*30 ;
   point.pos.sumVector(point.pos,difference);
+
+  
 
   A.update();
   B.update();

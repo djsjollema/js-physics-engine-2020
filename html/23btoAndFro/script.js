@@ -28,9 +28,9 @@ toB = true;
 difference.difVector(A.pos,B.pos);
 distance = difference.magnitude;
 
-animate();
+//animate();
 
-//animation loop
+animation loop
 function animate(){
   context.clearRect(0,0,width,height)
   requestAnimationFrame(animate);
@@ -43,7 +43,6 @@ function animate(){
 
   if(difference.magnitude < 40){
     toB = !toB;
-    console.log('coll')
     t=0;
 
   }
