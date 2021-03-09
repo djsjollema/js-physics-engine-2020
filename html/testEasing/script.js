@@ -10,55 +10,47 @@ canvas.height = height;
 // begin hier met jouw code voor deze opdrachtlet myGO;
 
 // declare namespace en scope
-let A,B,point,toB,difference,distance,test;
-A = new GameObject(new Vector2d(width*0.2,height*0.2),new Vector2d(0,0),new Vector2d(0,0));
-A.radius = 30;
-A.color = "red";
-B = new GameObject(new Vector2d(width*0.8,height*0.8),new Vector2d(0,0),new Vector2d(0,0));
-B.radius = 30;
-B.color = "yellow";
+let point,index,difference,distance,waypoints;
+
+waypoints = [];
 point = new GameObject(new Vector2d(400,200),new Vector2d(0,0),new Vector2d(0,0));
-point.color = "black";
-difference = new Vector2d(0,0)
-toB = true;
+index = 0;
 
-difference.difVector(A.pos,B.pos);
-distance = difference.magnitude
-test = new Vector2d(0,0);
-test.difVector(B.pos,A.pos);
-console.log(test.magnitude)
+//fill the waypoints array
 
-animate();
 
 //animation loop
+animate();
+
+
 function animate(){
   context.clearRect(0,0,width,height)
   requestAnimationFrame(animate);
 
-  if(toB){
-    difference.difVector(B.pos,point.pos);
-  } else {
-    difference.difVector(A.pos,point.pos);
-  }
+  // if(toB){
+  //   difference.difVector(B.pos,point.pos);
+  // } else {
+  //   difference.difVector(A.pos,point.pos);
+  // }
 
-  if(difference.magnitude < 40){
-    toB = !toB;
-  }
-  console.log(difference.magnitude/test.magnitude)
+  // if(difference.magnitude < 40){
+  //   toB = !toB;
+  // }
+  // console.log(difference.magnitude/test.magnitude)
 
-  difference.magnitude = EasingFunctions.easeOutCubic(difference.magnitude/distance)*30 ;
-  point.pos.sumVector(point.pos,difference);
+  // difference.magnitude = EasingFunctions.easeOutCubic(difference.magnitude/distance)*30 ;
+  // point.pos.sumVector(point.pos,difference);
 
   
 
-  A.update();
-  B.update();
+  // A.update();
+  // B.update();
 
-  A.draw(context);
-  B.draw(context);
+  // A.draw(context);
+  // B.draw(context);
 
-  point.draw(context);
-  point.update()
+  // point.draw(context);
+  // point.update()
 }
 
 // t = 0 - Animation is just started. Zero time has passed
