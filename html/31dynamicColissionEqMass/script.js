@@ -16,8 +16,14 @@ line_ab = new LinearFunction(1,0)
 
 GO_a.radius = 75;
 GO_b.radius = 75;
-GO_a.color = "rgba(255,0,0,0.4)"
-GO_b.color = "rgba(0,0,255,0.4)"
+GO_a.color = "rgba(255,0,0,0.4)";
+GO_b.color = "rgba(0,0,255,0.4)";
+
+GO_a.rad = new Vector2d(1,1);
+GO_a.tan = new Vector2d(-1,1);
+
+GO_b.rad = new Vector2d(1,1);
+GO_b.tan = new Vector2d(-1,1);
 
 distance = Infinity;
 collision = false;
@@ -39,18 +45,46 @@ function animate(){
     GO_b.color = "rgba(0,0,255,0.4)";
   }
 
-  
   drawLine(line_ab,GO_a.pos,GO_b.pos);
   line_ab.draw(context,"blue");
+
+  GO_a.rad.difVector(GO_b.pos,GO_a.pos);
+  GO_a.rad.magnitude = 1;
+
+  GO_a.tan.dx = GO_a.rad.dy;
+  GO_a.tan.dy = -GO_a.rad.dx;
+
+  GO_a.rad.magnitude = GO_a.vel.dotProduct(GO_a.rad);
+  GO_a.tan.magnitude = GO_a.vel.dotProduct(GO_a.tan);
+  
+  //
+
+  GO_b.rad.difVector(GO_a.pos,GO_b.pos);
+  GO_b.rad.magnitude = 1;
+
+  GO_b.tan.dx = GO_b.rad.dy;
+  GO_b.tan.dy = -GO_b.rad.dx;
+
+  GO_b.rad.magnitude = GO_b.vel.dotProduct(GO_b.rad);
+  GO_b.tan.magnitude = GO_b.vel.dotProduct(GO_b.tan);
+
 
   GO_a.update();
   GO_b.update();
 
+  GO_a.draw(context);
+  GO_b.draw(context);
+
+  GO_a.rad.draw(GO_a.pos.dx,GO_a.pos.dy,"red",70);
+  GO_a.tan.draw(GO_a.pos.dx,GO_a.pos.dy,"blue",70);
+
+  GO_b.rad.draw(GO_b.pos.dx,GO_b.pos.dy,"red",70);
+  GO_b.tan.draw(GO_b.pos.dx,GO_b.pos.dy,"blue",70);
+
   GO_a.vel.draw(GO_a.pos.dx,GO_a.pos.dy,"rgba(100,100,100,0.4)",70);
   GO_b.vel.draw(GO_b.pos.dx,GO_b.pos.dy,"rgba(100,100,100,0.4)",70);
   
-  GO_a.draw(context);
-  GO_b.draw(context);
+
 }
 
 function drawLine(line_ab,a,b){
