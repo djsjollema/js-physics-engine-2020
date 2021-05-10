@@ -17,6 +17,7 @@ l = new LinearFunction(2,100);
 m = new LinearFunction(2,100)
 ab = new Vector2d(B.x-A.x,B.y-A.y );
 ac = new Vector2d(C.x-A.x,C.y-A.y );
+ad = new Vector2d(ac.dy,-ac.dx);
 
 
 
@@ -41,10 +42,17 @@ function animate(){
   ac.dx = C.x - A.x;
   ac.dy = C.y - A.y;
 
+  ad.dx = ac.dy;
+  ad.dy = -ac.dx;
+
   ac.magnitude = 1;
-  ac.magnitude = ac.magnitude * ab.dotProduct(ac)
+  ac.magnitude = ac.magnitude * ab.dotProduct(ac);
+
+  ad.magnitude = 1;
+  ad.magnitude = ad.magnitude * ab.dotProduct(ad);
  
   ac.draw(A.x,A.y,"blue",1)
+  ad.draw(A.x,A.y,"blue",1)
   ab.draw(A.x,A.y,"white",1)
   //console.log(ab.dotProduct(ac))
 
