@@ -14,8 +14,8 @@ GO_a = new GameObject(new Vector2d(200,200), new Vector2d(2,2), new Vector2d(0,0
 GO_b = new GameObject(new Vector2d(800,300), new Vector2d(-2,-2), new Vector2d(0,0));
 line_ab = new LinearFunction(1,0)
 
-GO_a.radius = 75;
-GO_b.radius = 75;
+GO_a.radius = 200;
+GO_b.radius = 200;
 GO_a.color = "rgba(255,0,0,0.4)";
 GO_b.color = "rgba(0,0,255,0.4)";
 
