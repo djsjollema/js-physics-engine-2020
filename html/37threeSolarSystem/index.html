@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {margin: 0;}
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <script src="../../lib/three.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        let sun = {};
+        sun.texture = new THREE.TextureLoader().load( 'texture/sunmap.jpg' );
+        sun.material = new THREE.MeshLambertMaterial( { map:sun.texture} );
+        sun.geometry = new THREE.BoxGeometry();
+        sun.mesh = new THREE.Mesh(sun.geometry,sun.material);
+        scene.add(sun.mesh);
+
+        camera.position.z = 5;
+
+        const light = new THREE.AmbientLight( 0xffffff ); // soft red light
+        scene.add( light );     
+
+        
+        animate()
+
+        function animate(){
+            requestAnimationFrame(animate);
+            sun.mesh.rotation.y += 0.001;
+            sun.mesh.rotation.x += 0.005;
+            renderer.render(scene,camera);
+
+        }
+
+   
+
+
+
+    </script>
+    
+</body>
+</html>
