@@ -21,14 +21,29 @@
         let sun = {};
         sun.texture = new THREE.TextureLoader().load( 'texture/sunmap.jpg' );
         sun.material = new THREE.MeshLambertMaterial( { map:sun.texture} );
-        sun.geometry = new THREE.BoxGeometry();
+        sun.geometry = new THREE.SphereGeometry( 100, 32, 32 );
         sun.mesh = new THREE.Mesh(sun.geometry,sun.material);
         scene.add(sun.mesh);
 
-        camera.position.z = 5;
+        let earth = {};
+        earth.texture = new THREE.TextureLoader().load( 'texture/earthmap1k.jpg' );
+        earth.material = new THREE.MeshLambertMaterial( { map:earth.texture} );
+        earth.geometry = new THREE.SphereGeometry( 30, 32, 32 );
+        earth.mesh = new THREE.Mesh(earth.geometry,earth.material);
+        earth.radius = 300;
+        earth.phi = Math.PI/2;
+        earth.theta = 0;
+        scene.add(earth.mesh);
+        earth.mesh.position.setFromSphericalCoords(earth.radius ,earth.phi ,earth.theta );
+
+        camera.position.z = 800;
 
         const light = new THREE.AmbientLight( 0xffffff ); // soft red light
-        scene.add( light );     
+        scene.add( light ); 
+        
+        const sunlight = new THREE.PointLight( 0xfffffff, 5, 1000 );
+        sunlight.position.set( 0, 0, 0 );
+        scene.add( sunlight );
 
         
         animate()
@@ -36,7 +51,9 @@
         function animate(){
             requestAnimationFrame(animate);
             sun.mesh.rotation.y += 0.001;
-            sun.mesh.rotation.x += 0.005;
+            earth.theta -= 0.01;
+            earth.mesh.position.setFromSphericalCoords(earth.radius ,earth.phi ,earth.theta );
+            earth.mesh.rotation.y += 0.1;
             renderer.render(scene,camera);
 
         }
