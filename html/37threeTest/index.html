@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="../../lib/three.js"></script>
+		<script>
+			const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth,window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            let sun = {};
+            sun.geometry = new THREE.SphereGeometry(70,20,20);
+            sun.texture = new THREE.TextureLoader().load("texture/sunmap.jpg");
+            sun.material = new THREE.MeshLambertMaterial({map:sun.texture});
+            sun.Mesh = new THREE.Mesh(sun.geometry,sun.material);
+            scene.add(sun.Mesh);
+
+            let earth = {};
+            earth.geometry = new THREE.SphereGeometry(20,20,20);
+            earth.texture = new THREE.TextureLoader().load("texture/earthmap1k.jpg");
+            earth.material = new THREE.MeshLambertMaterial({map:earth.texture});
+            earth.Mesh = new THREE.Mesh(earth.geometry,earth.material);
+            earth.theta = 0;
+            earth.dTheta = 0.01;
+            earth.Mesh.position.setFromSphericalCoords (200, Math.PI/2, earth.theta); 
+            scene.add(earth.Mesh);
+                     
+
+            camera.position.z = 500;
+
+            const sunlight = new THREE.PointLight( 0xffffff, 5, 1000 );
+            sunlight.position.set( 0, 0, 0 );
+            scene.add( sunlight );
+
+            const ambientLight = new THREE.AmbientLight( 0xffffff ); // soft white light
+            scene.add( ambientLight );
+
+
+            function animate(){
+                requestAnimationFrame(animate);
+                sun.Mesh.rotation.y += 0.001;
+                earth.theta+=earth.dTheta;
+                earth.Mesh.rotation.y += 0.05;
+                earth.Mesh.position.setFromSphericalCoords (200, Math.PI/2, earth.theta);
+                renderer.render(scene,camera);
+            }
+
+            animate();
+
+		</script>
+	</body>
+</html>
